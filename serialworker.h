@@ -2,6 +2,7 @@
 #define SERIALWORKER_H
 
 #include <QObject>
+#include <QDebug>
 #include <QByteArray>
 #include <QTimer>
 #include <QTextStream>

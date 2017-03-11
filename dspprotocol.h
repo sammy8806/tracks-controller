@@ -2,6 +2,7 @@
 #define DSPPROTOCOL_H
 
 #include <QObject>
+#include <QDebug>
 
 class DspProtocol : public QObject
 {

@@ -1,12 +1,13 @@
 #ifndef DSPCONTROLLER_H
 #define DSPCONTROLLER_H
 
-#include <QObject>
-#include <QThread>
-
+#include "dspprotocol.h"
 #include "handlerdspprotocol.h"
 #include "handlerchinfoprotocol.h"
-#include "dspprotocol.h"
+
+#include <QObject>
+#include <QThread>
+#include <QDebug>
 
 class DspController : public QObject
 {
@@ -17,7 +18,12 @@ public:
     void updateDisplayName();
     void updateConnectionStatus();
 
+    void initDevice();
+    void disconnectDevice();
+    void updateLineData();
+
 protected:
+    void request(unsigned char cmd);
     void request(unsigned char cmd, unsigned char *data);
 
 private:

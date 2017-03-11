@@ -4,6 +4,8 @@
 #include "dspprotocolhandler.h"
 #include "dspprotocol.h"
 
+#include <QDebug>
+
 class HandlerDspProtocol : public DspProtocolHandler
 {
 public:

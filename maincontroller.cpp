@@ -27,19 +27,24 @@ void MainController::startup()
 
     connect(&m_serialThread, &QThread::finished, m_serialWorker, &QObject::deleteLater);
 
+    // DSP-Controller init
+    m_dspController = new DspController();
+
     // Creating Main-Window
-    m_mainWindow = new MainWindow();
+    m_mainWindow = new MainWindow(m_dspController);
 
     // QT needs the Interface in the main-thread
     // mainWindow.moveToThread(&m_windowThread);
     // connect(&m_windowThread, &QThread::finished, &mainWindow, &QObject::deleteLater);
 
-    m_mainWindow->show();
+    connect(m_dspController, &DspController::connectionStatus, m_mainWindow, &MainWindow::updateDeviceStatus, Qt::DirectConnection);
+    connect(m_dspController, &DspController::displayName, m_mainWindow, &MainWindow::updateDisplayName, Qt::DirectConnection);
+    connect(m_dspController, &DspController::serialWrite, m_serialWorker, &SerialWorker::write, Qt::DirectConnection);
+    connect(m_serialWorker, &SerialWorker::dataReceived, m_dspController, &DspController::serialReceive, Qt::DirectConnection);
 
-    // DSP-Controller
-    m_dspController = new DspController();
     m_dspController->updateConnectionStatus();
 
-    connect(m_dspController, &DspController::serialWrite, m_serialWorker, &SerialWorker::write);
+    // Startup finished
+    m_mainWindow->show();
 
 }
