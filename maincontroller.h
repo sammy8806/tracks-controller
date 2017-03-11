@@ -24,8 +24,8 @@ public slots:
 
 private:
 
-    QThread m_serialThread;
-    QThread m_windowThread;
+    QThread* m_serialThread;
+    QThread* m_windowThread;
 
     MainWindow* m_mainWindow;
     SerialWorker* m_serialWorker;

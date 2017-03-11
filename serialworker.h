@@ -5,11 +5,21 @@
 #include <QDebug>
 #include <QByteArray>
 #include <QTimer>
-#include <QTextStream>
-#include <QSerialPort>
-#include <QSerialPortInfo>
+#include <QThread>
 
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
+
+#include <QTextStream>
 #include <QCoreApplication>
+#include <QFile>
+#include <QStringList>
+
+QT_USE_NAMESPACE
+
+QT_BEGIN_NAMESPACE
+
+QT_END_NAMESPACE
 
 class SerialWorker : public QObject
 {

@@ -1,5 +1,7 @@
 #include "serialworker.h"
 
+QT_USE_NAMESPACE
+
 SerialWorker::SerialWorker(QSerialPort *serialPort, QObject *parent)
     : QObject(parent)
     , m_serialPort(serialPort)
@@ -11,7 +13,6 @@ SerialWorker::SerialWorker(QSerialPort *serialPort, QObject *parent)
             this, &SerialWorker::handleError);
 
     qDebug() << "- Opening SerialPort: " << m_serialPort->portName();
-    m_serialPort->open(QIODevice::ReadWrite);
     qDebug() << "- Address: " << m_serialPort->handle();
     qDebug() << "- Is port open: " << m_serialPort->isOpen();
     qDebug() << "- is port writeable: " << m_serialPort->isWritable();
@@ -19,6 +20,8 @@ SerialWorker::SerialWorker(QSerialPort *serialPort, QObject *parent)
 
 void SerialWorker::handleError(QSerialPort::SerialPortError serialPortError)
 {
+    qDebug() << "ERROR!!!!!";
+
     if (serialPortError == QSerialPort::WriteError) {
         m_standardOutput << QObject::tr("An I/O error occurred while writing the data to port %1, error: %2").arg(m_serialPort->portName()).arg(m_serialPort->errorString()) << endl;
         QCoreApplication::exit(1);
@@ -40,10 +43,13 @@ void SerialWorker::write(QByteArray writeData)
     writeStr = QByteArray::fromHex(writeData.toHex());
     qDebug() << "- Data: " << writeStr;
 
+    qDebug() << "= ThreadId: " << this->thread()->currentThreadId();
+
     // QString writeStr(writeData.toHex());
 
     if(!m_serialPort->isWritable()) {
         qDebug() << "-> Reopening Device for Write";
+        m_serialPort->close();
         m_serialPort->open(QIODevice::ReadWrite);
         qDebug() << "-> Selfcall";
         this->write(writeData);
