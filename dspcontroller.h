@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QThread>
 #include <QDebug>
+#include <QTimer>
 
 class DspController : public QObject
 {
@@ -33,6 +34,8 @@ private:
 
     unsigned char m_lastCmd;
 
+    QTimer  m_timer;
+
 signals:
     void serialWrite(QByteArray writeData);
 
@@ -41,6 +44,9 @@ signals:
 
 public slots:
     void serialReceive(QByteArray recvData);
+
+private slots:
+    void timerTimeout();
 };
 
 #endif // DSPCONTROLLER_H

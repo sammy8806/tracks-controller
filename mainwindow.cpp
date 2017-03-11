@@ -7,6 +7,7 @@ MainWindow::MainWindow(DspController* dspController, QWidget *parent) :
     m_dspController(dspController)
 {
     ui->setupUi(this);
+    m_dspController->initDevice();
 }
 
 MainWindow::~MainWindow()

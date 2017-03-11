@@ -11,9 +11,10 @@ SerialWorker::SerialWorker(QSerialPort *serialPort, QObject *parent)
             this, &SerialWorker::handleError);
 
     qDebug() << "- Opening SerialPort: " << m_serialPort->portName();
-    qDebug() << "- Address: " << m_serialPort->handle();
     m_serialPort->open(QIODevice::ReadWrite);
+    qDebug() << "- Address: " << m_serialPort->handle();
     qDebug() << "- Is port open: " << m_serialPort->isOpen();
+    qDebug() << "- is port writeable: " << m_serialPort->isWritable();
 }
 
 void SerialWorker::handleError(QSerialPort::SerialPortError serialPortError)
@@ -31,11 +32,25 @@ QByteArray SerialWorker::read() {
 
 void SerialWorker::write(QByteArray writeData)
 {
+    QByteArray writeStr;
     qDebug() << "SerialWorker::write";
     qDebug() << "- is port open: " << m_serialPort->isOpen();
+    qDebug() << "- is port writeable: " << m_serialPort->isWritable();
     qDebug() << "- Address: " << m_serialPort->handle();
+    writeStr = QByteArray::fromHex(writeData.toHex());
+    qDebug() << "- Data: " << writeStr;
 
-    qint64 bytesWritten = m_serialPort->write(writeData);
+    // QString writeStr(writeData.toHex());
+
+    if(!m_serialPort->isWritable()) {
+        qDebug() << "-> Reopening Device for Write";
+        m_serialPort->open(QIODevice::ReadWrite);
+        qDebug() << "-> Selfcall";
+        this->write(writeData);
+        return;
+    }
+
+    qint64 bytesWritten = m_serialPort->write(writeStr);
     qDebug() << "- Written: " << bytesWritten;
 
     if (bytesWritten == -1) {

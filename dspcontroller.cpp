@@ -7,7 +7,15 @@ DspController::DspController(QObject *parent) :
     ,m_handlerDspProtocol(new HandlerDspProtocol())
     ,m_handlerChannelInfo(new HandlerChInfoProtocol())
 {
+    connect(&m_timer, &QTimer::timeout, this, &DspController::timerTimeout);
+    m_timer.setSingleShot(true);
 
+    m_timer.start(3000);
+}
+
+void DspController::timerTimeout() {
+    qDebug() << "DspController::timerTimeout";
+    this->updateLineData();
 }
 
 void DspController::updateDisplayName()

@@ -32,6 +32,7 @@ void MainController::startup()
 
     // Creating Main-Window
     m_mainWindow = new MainWindow(m_dspController);
+    m_mainWindow->show();
 
     // QT needs the Interface in the main-thread
     // mainWindow.moveToThread(&m_windowThread);
@@ -43,8 +44,6 @@ void MainController::startup()
     connect(m_serialWorker, &SerialWorker::dataReceived, m_dspController, &DspController::serialReceive, Qt::DirectConnection);
 
     m_dspController->updateConnectionStatus();
-
-    // Startup finished
-    m_mainWindow->show();
+    m_dspController->disconnectDevice();
 
 }
