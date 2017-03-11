@@ -16,8 +16,13 @@ SerialWorker::SerialWorker(QObject *parent)
     m_serialPort->setBaudRate(serialPortBaudRate);
     m_serialPort->open(QIODevice::ReadWrite);
 
+    connect(m_serialPort, &QSerialPort::readyRead, this, &SerialWorker::handleReadyRead, Qt::DirectConnection);
     connect(m_serialPort, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
             this, &SerialWorker::handleError);
+    connect(&m_timerRead, &QTimer::timeout, this, &SerialWorker::handleReadTimeout, Qt::DirectConnection);
+
+    m_timerRead.setSingleShot(false);
+    m_timerRead.start(50);
 
     qDebug() << "- Opening SerialPort: " << m_serialPort->portName();
     qDebug() << "- Address: " << m_serialPort->handle();
@@ -32,6 +37,62 @@ void SerialWorker::handleError(QSerialPort::SerialPortError serialPortError)
     if (serialPortError == QSerialPort::WriteError) {
         m_standardOutput << QObject::tr("An I/O error occurred while writing the data to port %1, error: %2").arg(m_serialPort->portName()).arg(m_serialPort->errorString()) << endl;
         QCoreApplication::exit(1);
+    }
+}
+
+void SerialWorker::handleReadyRead()
+{
+    qDebug() << "SerialWorker::handleReadyRead";
+    QByteArray readData = m_serialPort->readAll();
+    m_readData.append(readData);
+
+    if(0 < readData.size()){
+        qDebug() << "Received bytes: " << readData.size() << " Timestamp: " << QDateTime::currentMSecsSinceEpoch();
+    }else{
+        qDebug() << "No data." << " Timestamp: " << QDateTime::currentMSecsSinceEpoch();
+    }
+
+    if (!m_timerRead.isActive())
+        m_timerRead.start(500);
+}
+
+void SerialWorker::handleReadTimeout()
+{
+    // qDebug() << "SerialWorker::handleReadTimeout";
+
+    if (m_readData.isEmpty()) {
+        // m_standardOutput << QObject::tr("No data was currently available for reading from port %1").arg(m_serialPort->portName()) << endl;
+    } else {
+        qDebug() << QObject::tr("Data successfully received from port %1").arg(m_serialPort->portName()) << endl;
+        QByteArray buf;
+        bool inPacket = false;
+        for(int i=0; i<m_readData.length(); i++) {
+            qDebug() << "-> " << QByteArray(1, m_readData.at(i)).toHex();
+
+            unsigned char activeChar = m_readData.at(i);
+            if((activeChar == 0xf0) && (!inPacket)) {
+                qDebug() << "- Starting Packet";
+                inPacket = true;
+            }
+
+            if(inPacket) {
+                qDebug() << "- Packet Data";
+                buf.append(activeChar);
+            }
+
+            if(activeChar == 0xf7 && inPacket) {
+                qDebug() << "- Ending Packet";
+
+                inPacket = false;
+                emit dataReceived(buf);
+                // emit incomingPacket(buf);
+                buf.clear();
+            }
+
+            qDebug() << "~ Packet processed";
+        }
+
+        m_readData.clear();
     }
 }
 
@@ -73,10 +134,4 @@ void SerialWorker::write(QByteArray writeData)
         m_standardOutput << QObject::tr("Failed to write all the data to port %1, error: %2").arg(m_serialPort->portName()).arg(m_serialPort->errorString()) << endl;
         QCoreApplication::exit(1);
     }
-
-    m_serialPort->waitForBytesWritten(1000);
-
-    m_serialPort->waitForReadyRead(1000);
-    QByteArray answerData = this->read();
-    emit dataReceived(answerData);
 }

@@ -8,7 +8,8 @@ class DspProtocolHandler
 public:
     // virtual DspProtocolHandler() = 0;
 
-    virtual void parsePacket(QByteArray data, DspProtocol::IPacket &packet) = 0;
+    template<typename T>
+    void parsePacket(QByteArray data, T &packet);
 };
 
 #endif // DSPPROTOCOLHANDLER_H

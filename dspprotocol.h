@@ -50,6 +50,16 @@ public:
         unsigned char presetName[16];
     };
 
+    struct LineInfo {
+        unsigned char inA;
+        unsigned char inB;
+
+        unsigned char out1;
+        unsigned char out2;
+        unsigned char out3;
+        unsigned char out4;
+    };
+
     explicit DspProtocol(QObject *parent = 0);
 
 signals:

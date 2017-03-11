@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>404</width>
-    <height>229</height>
+    <width>405</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,14 +69,20 @@
    <widget class="QProgressBar" name="inA">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>80</y>
+      <x>20</x>
+      <y>110</y>
       <width>31</width>
-      <height>81</height>
+      <height>281</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>6</number>
     </property>
     <property name="value">
      <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -91,14 +97,20 @@
    <widget class="QProgressBar" name="inB">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>80</y>
+      <x>60</x>
+      <y>110</y>
       <width>31</width>
-      <height>81</height>
+      <height>281</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>6</number>
     </property>
     <property name="value">
      <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -113,14 +125,20 @@
    <widget class="QProgressBar" name="out1">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>80</y>
+      <x>120</x>
+      <y>110</y>
       <width>31</width>
-      <height>81</height>
+      <height>281</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>5</number>
     </property>
     <property name="value">
      <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -135,14 +153,20 @@
    <widget class="QProgressBar" name="out2">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>80</y>
+      <x>160</x>
+      <y>110</y>
       <width>31</width>
-      <height>81</height>
+      <height>281</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>5</number>
     </property>
     <property name="value">
      <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -157,14 +181,20 @@
    <widget class="QProgressBar" name="out3">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>80</y>
+      <x>200</x>
+      <y>110</y>
       <width>31</width>
-      <height>81</height>
+      <height>281</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>5</number>
     </property>
     <property name="value">
      <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -179,14 +209,20 @@
    <widget class="QProgressBar" name="out4">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>80</y>
+      <x>240</x>
+      <y>110</y>
       <width>31</width>
-      <height>81</height>
+      <height>281</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>5</number>
     </property>
     <property name="value">
      <number>0</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -198,82 +234,118 @@
      <enum>QProgressBar::TopToBottom</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="lblA">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>160</y>
-      <width>21</width>
+      <x>20</x>
+      <y>390</y>
+      <width>31</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>A</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="lblB">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>160</y>
-      <width>21</width>
+      <x>60</x>
+      <y>390</y>
+      <width>31</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>B</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="lbl1">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>160</y>
-      <width>10</width>
+      <x>120</x>
+      <y>390</y>
+      <width>30</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>1</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="lbl2">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>160</y>
-      <width>10</width>
+      <x>160</x>
+      <y>390</y>
+      <width>30</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>2</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="lbl3">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>160</y>
-      <width>10</width>
+      <x>200</x>
+      <y>390</y>
+      <width>30</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>3</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="lbl4">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>160</y>
-      <width>10</width>
+      <x>240</x>
+      <y>390</y>
+      <width>30</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>4</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
     </property>
    </widget>
    <widget class="QPushButton" name="btnConnect">
@@ -315,13 +387,349 @@
      <string>Update Line</string>
     </property>
    </widget>
+   <widget class="QLabel" name="limitA">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 191, 0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Limit</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="clipA">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>90</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ff0000;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Clip</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="limitB">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>70</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 191, 0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Limit</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="clipB">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>90</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ff0000;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Clip</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="clip2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>90</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ff0000;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Clip</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="limit1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>70</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 191, 0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Limit</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="limit2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>70</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 191, 0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Limit</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="clip1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>90</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ff0000;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Clip</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="clip3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>90</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ff0000;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Clip</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="clip4">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>90</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ff0000;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Clip</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="limit4">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>70</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 191, 0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Limit</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="limit3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>70</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 191, 0);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>Limit</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>404</width>
+     <width>405</width>
      <height>21</height>
     </rect>
    </property>

@@ -34,6 +34,8 @@ void MainController::startup()
 
     connect(m_dspController, &DspController::connectionStatus, m_mainWindow, &MainWindow::updateDeviceStatus);
     connect(m_dspController, &DspController::displayName, m_mainWindow, &MainWindow::updateDisplayName);
+    connect(m_dspController, &DspController::lineData, m_mainWindow, &MainWindow::updateLineData);
+
     connect(m_dspController, &DspController::serialWrite, m_serialWorker, &SerialWorker::write, Qt::DirectConnection);
     connect(m_serialWorker, &SerialWorker::dataReceived, m_dspController, &DspController::serialReceive, Qt::DirectConnection);
 

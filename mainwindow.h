@@ -23,6 +23,8 @@ private:
 public slots:
     void updateDisplayName(QString name);
     void updateDeviceStatus(QString status);
+    void updateLineData(DspProtocol::LineInfo data);
+
 private slots:
     void on_btnConnect_clicked();
     void on_btnDisconnect_clicked();

@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QTimer>
 #include <QThread>
+#include <QDateTime>
 
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
@@ -33,6 +34,8 @@ public:
 
 private slots:
     void handleError(QSerialPort::SerialPortError error);
+    void handleReadTimeout();
+    void handleReadyRead();
 
 Q_SIGNALS:
     void dataReceived(QByteArray data);

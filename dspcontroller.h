@@ -28,7 +28,8 @@ protected:
     void request(unsigned char cmd, unsigned char *data);
 
 private:
-    DspProtocolHandler* m_protoHandler;
+    //DspProtocolHandler* m_protoHandler;
+    HandlerDspProtocol* m_protoHandler;
     HandlerDspProtocol* m_handlerDspProtocol;
     HandlerChInfoProtocol* m_handlerChannelInfo;
 
@@ -41,6 +42,7 @@ signals:
 
     void displayName(QString name);
     void connectionStatus(QString status);
+    void lineData(DspProtocol::LineInfo);
 
 public slots:
     void serialReceive(QByteArray recvData);
