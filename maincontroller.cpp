@@ -15,16 +15,8 @@ void MainController::startup()
     // Creating Subthreads
 
     // Creating Serial-Worker
-    QSerialPort serialPort;
-    QString serialPortName = "COM5";
-    serialPort.setPortName(serialPortName);
-
-    int serialPortBaudRate = QSerialPort::Baud9600;
-    serialPort.setBaudRate(serialPortBaudRate);
-    serialPort.open(QIODevice::ReadWrite);
-
     m_serialThread = new QThread();
-    m_serialWorker = new SerialWorker(&serialPort);
+    m_serialWorker = new SerialWorker();
     m_serialWorker->moveToThread(m_serialThread);
 
     connect(m_serialThread, &QThread::finished, m_serialWorker, &QObject::deleteLater);

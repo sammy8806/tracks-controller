@@ -26,7 +26,7 @@ class SerialWorker : public QObject
     Q_OBJECT
 
 public:
-    SerialWorker(QSerialPort *serialPort, QObject *parent = 0);
+    SerialWorker(QObject *parent = 0);
 
     QByteArray read();
     void write(QByteArray writeData);

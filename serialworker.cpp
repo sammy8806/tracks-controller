@@ -2,12 +2,19 @@
 
 QT_USE_NAMESPACE
 
-SerialWorker::SerialWorker(QSerialPort *serialPort, QObject *parent)
+SerialWorker::SerialWorker(QObject *parent)
     : QObject(parent)
-    , m_serialPort(serialPort)
     , m_standardOutput(stdout)
+    , m_serialPort(new QSerialPort())
 {
     qDebug() << "SerialWorker::SerialWorker";
+
+    QString serialPortName = "COM5";
+    m_serialPort->setPortName(serialPortName);
+
+    int serialPortBaudRate = QSerialPort::Baud9600;
+    m_serialPort->setBaudRate(serialPortBaudRate);
+    m_serialPort->open(QIODevice::ReadWrite);
 
     connect(m_serialPort, static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(&QSerialPort::error),
             this, &SerialWorker::handleError);
