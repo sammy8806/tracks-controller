@@ -60,6 +60,40 @@ public:
         unsigned char out4;
     };
 
+    struct EqSetting {
+        unsigned char freq;
+        unsigned char type;
+        unsigned char gain;
+    };
+
+    struct ChanPresetInfo {
+        unsigned char input;
+        unsigned char gain;
+        unsigned char limiterAttack;
+        unsigned char limiterRelease;
+        unsigned char limiterThreshold;
+        unsigned char _useless[3];
+        unsigned char phaseFlip;
+        unsigned char HPFreq;
+        unsigned char HPSlope;
+        unsigned char LPFreq;
+        unsigned char LPSlope;
+        EqSetting Eq[7];
+        unsigned char _useless2;
+        unsigned char delayCourse;
+        unsigned char delayFine;
+        unsigned char _useless3[3];
+        unsigned char inputName[8];
+        unsigned char presetName[16];
+    };
+
+    struct ProgramInfo {
+        unsigned char _useless[44];
+        unsigned char muteData;
+        unsigned char _useless2;
+        unsigned char programName[16];
+    };
+
     explicit DspProtocol(QObject *parent = 0);
 
 signals:

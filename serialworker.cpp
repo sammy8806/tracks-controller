@@ -22,7 +22,7 @@ SerialWorker::SerialWorker(QObject *parent)
     connect(&m_timerRead, &QTimer::timeout, this, &SerialWorker::handleReadTimeout, Qt::DirectConnection);
 
     m_timerRead.setSingleShot(false);
-    m_timerRead.start(50);
+    m_timerRead.start(300);
 
     qDebug() << "- Opening SerialPort: " << m_serialPort->portName();
     qDebug() << "- Address: " << m_serialPort->handle();

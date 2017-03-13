@@ -16,10 +16,11 @@ QByteArray HandlerDspProtocol::buildPacket(unsigned char cmd, unsigned char *dat
                                   0x00, 0x00, 0x00, 0x00,
                                   0xf7};
 
-    for(int i=0; i<7; i++)
-        packetData[i+4] = data[i];
+    /*for(int i=0; i<8; i++)
+        packetData[i+4] = data[i];*/
+
+    memcpy(packetData+4, data, 8);
 
     QByteArray packet(reinterpret_cast<const char*>(packetData), sizeof(packetData));
     return packet;
 }
-

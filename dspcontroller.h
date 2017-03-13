@@ -22,6 +22,7 @@ public:
     void initDevice();
     void disconnectDevice();
     void updateLineData();
+    void muteChannel(unsigned char channel, bool status);
 
 protected:
     void request(unsigned char cmd);
@@ -43,6 +44,7 @@ signals:
     void displayName(QString name);
     void connectionStatus(QString status);
     void lineData(DspProtocol::LineInfo);
+    void mute(unsigned char channel, bool status);
 
 public slots:
     void serialReceive(QByteArray recvData);

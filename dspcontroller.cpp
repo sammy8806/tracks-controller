@@ -9,7 +9,7 @@ DspController::DspController(QObject *parent) :
 {
     connect(&m_timer, &QTimer::timeout, this, &DspController::timerTimeout);
     m_timer.setSingleShot(false);
-    m_timer.start(100);
+    // m_timer.start(2000);
 }
 
 void DspController::timerTimeout() {
@@ -47,6 +47,13 @@ void DspController::updateLineData()
     this->request(DspProtocol::LINE_DATA);
 }
 
+void DspController::muteChannel(unsigned char channel, bool status)
+{
+    qDebug() << "DspController::mute(" << QString::number(channel) << "-" << status << ")";
+    unsigned char data[] = {channel, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, status};
+    this->request(DspProtocol::MUTE, data);
+}
+
 void DspController::request(unsigned char cmd) {
     unsigned char data[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     this->request(cmd, data);
@@ -68,6 +75,7 @@ void DspController::request(unsigned char cmd, unsigned char* data)
 
     QByteArray serialPacket;
     serialPacket = m_handlerDspProtocol->buildPacket(cmd, data);
+    qDebug() << "~~ " << serialPacket.toHex();
 
     emit serialWrite(serialPacket);
 }
@@ -94,6 +102,12 @@ void DspController::serialReceive(QByteArray recvData)
 
         emit lineData(data);
         break;
+
+    case DspProtocol::MUTE:
+        qDebug() << "# Mute";
+        emit mute(packet.d0, packet.d7);
+        break;
+
     default:
         qDebug() << "# Some Data";
         break;

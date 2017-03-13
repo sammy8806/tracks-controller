@@ -8,6 +8,8 @@ MainWindow::MainWindow(DspController* dspController, QWidget *parent) :
 {
     ui->setupUi(this);
     m_dspController->initDevice();
+    for(int i=0; i<8; i++)
+        m_muteStatus[i] = false;
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +64,26 @@ void MainWindow::updateLineData(DspProtocol::LineInfo data)
     ui->lbl4->setFrameShape(!!(data.out4 & (1<<7)) ? QFrame::Box : QFrame::NoFrame);
 }
 
+void MainWindow::updateMute(unsigned char channel, bool status)
+{
+    qDebug() << "MainWindow::updateMute(" << channel << ", " << status << ")";
+
+    if(channel < 0 || channel > 4) {
+        qCritical() << "This channel doesn't exist!";
+        QCoreApplication::exit(-1);
+    }
+
+    QPushButton *target = m_muteButtons[channel];
+
+    if(status) {
+        target->setStyleSheet("color: #f00;");
+    } else {
+        target->setStyleSheet("");
+    }
+
+    m_muteStatus[channel] = !m_muteStatus[channel];
+}
+
 void MainWindow::on_btnConnect_clicked()
 {
     m_dspController->initDevice();
@@ -75,4 +97,36 @@ void MainWindow::on_btnDisconnect_clicked()
 void MainWindow::on_btnLineUpdate_clicked()
 {
     m_dspController->updateLineData();
+}
+
+#define _toggle_mute(x, y) { m_dspController->muteChannel(x, !m_muteStatus[x]); m_muteButtons[x] = y; }
+
+void MainWindow::on_muteA_clicked()
+{
+    _toggle_mute(0, ui->muteA);
+}
+
+void MainWindow::on_muteB_clicked()
+{
+    _toggle_mute(1, ui->muteB);
+}
+
+void MainWindow::on_mute1_clicked()
+{
+    _toggle_mute(2, ui->mute1);
+}
+
+void MainWindow::on_mute2_clicked()
+{
+    _toggle_mute(3, ui->mute2);
+}
+
+void MainWindow::on_mute3_clicked()
+{
+    _toggle_mute(4, ui->mute3);
+}
+
+void MainWindow::on_mute4_clicked()
+{
+    _toggle_mute(5, ui->mute4);
 }
