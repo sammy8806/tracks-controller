@@ -44,6 +44,25 @@ public:
         unsigned char etx;
     };
 
+    union PacketUnion {
+        struct : public IPacket {
+            unsigned char stx;
+            unsigned char idm;
+            unsigned char idn;
+            unsigned char cmd;
+            unsigned char d0;
+            unsigned char d1;
+            unsigned char d2;
+            unsigned char d3;
+            unsigned char d4;
+            unsigned char d5;
+            unsigned char d6;
+            unsigned char d7;
+            unsigned char etx;
+        };
+        unsigned char packetData[13];
+    };
+
     struct ChInfoPacket : public IPacket {
         unsigned char unclear[40];
         unsigned char chanName[8];

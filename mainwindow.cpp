@@ -7,9 +7,9 @@ MainWindow::MainWindow(DspController* dspController, QWidget *parent) :
     m_dspController(dspController)
 {
     ui->setupUi(this);
-    m_dspController->initDevice();
-    for(int i=0; i<8; i++)
-        m_muteStatus[i] = false;
+    //m_dspController->initDevice();
+    /*for(int i=0; i<8; i++)
+        m_muteStatus[i] = false;*/
 }
 
 MainWindow::~MainWindow()
@@ -32,6 +32,43 @@ void MainWindow::updateLineData(DspProtocol::LineInfo data)
     qDebug() << "MainWindow::updateLineData";
 
     // Select | -20 | -10 | 0 | +3 | +9 | +15 | Clip | Limit
+
+    typedef union {
+        struct {
+            bool clip:1;
+            bool p15db:1;
+            bool p9db:1;
+            bool p3db:1;
+            bool p0db:1;
+            bool m10db:1;
+            bool m20db:1;
+            bool selected:1;
+        };
+        unsigned char value;
+    } inputData;
+
+    typedef union {
+        struct {
+            bool clip:1;
+            bool limit:1;
+            bool p15db:1;
+            bool p9db:1;
+            bool p3db:1;
+            bool p0db:1;
+            bool m15db:1;
+            bool selected:1;
+        };
+        unsigned char value;
+    } outputData;
+
+    inputData input1;
+    input1.value = data.inA;
+
+    ui->clipA->setVisible(input1.clip);
+    ui->inA->setValue(input1.m10db + input1.m20db + input1.p0db + input1.p3db + input1.p9db + input1.p15db);
+    ui->lblA->setFrameShape(input1.selected ? QFrame::Box : QFrame::NoFrame);
+
+    // TODO: more here ...
 
     ui->limitA->setVisible(false);
     ui->clipA->setVisible(data.inA & (1<<1));

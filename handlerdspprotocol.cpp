@@ -5,7 +5,6 @@ HandlerDspProtocol::HandlerDspProtocol()
 
 }
 
-
 QByteArray HandlerDspProtocol::buildPacket(unsigned char cmd, unsigned char *data)
 {
     qDebug() << "HandlerDspProtocol::buildPacket";

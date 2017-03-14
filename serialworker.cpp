@@ -70,7 +70,7 @@ void SerialWorker::handleReadTimeout()
             qDebug() << "-> " << QByteArray(1, m_readData.at(i)).toHex();
 
             unsigned char activeChar = m_readData.at(i);
-            if((activeChar == 0xf0) && (!inPacket)) {
+            if((activeChar == PACKET_BEGIN) && (!inPacket)) {
                 qDebug() << "- Starting Packet";
                 inPacket = true;
             }
@@ -80,7 +80,7 @@ void SerialWorker::handleReadTimeout()
                 buf.append(activeChar);
             }
 
-            if(activeChar == 0xf7 && inPacket) {
+            if(activeChar == PACKET_END && inPacket) {
                 qDebug() << "- Ending Packet";
 
                 inPacket = false;

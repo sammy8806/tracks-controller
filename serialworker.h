@@ -16,6 +16,9 @@
 #include <QFile>
 #include <QStringList>
 
+#define PACKET_BEGIN 0xf0
+#define PACKET_END 0xf7
+
 QT_USE_NAMESPACE
 
 QT_BEGIN_NAMESPACE

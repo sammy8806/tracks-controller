@@ -9,6 +9,8 @@
 #include <QThread>
 #include <QDebug>
 #include <QTimer>
+#include <QMutex>
+#include <QQueue>
 
 class DspController : public QObject
 {
@@ -26,13 +28,18 @@ public:
 
 protected:
     void request(unsigned char cmd);
-    void request(unsigned char cmd, unsigned char *data);
+    void request(unsigned char cmd, unsigned char* data);
+    void request(QByteArray serialPacket);
 
 private:
     //DspProtocolHandler* m_protoHandler;
     HandlerDspProtocol* m_protoHandler;
     HandlerDspProtocol* m_handlerDspProtocol;
     HandlerChInfoProtocol* m_handlerChannelInfo;
+
+    QQueue<QByteArray>* m_sendQueue;
+    QByteArray m_lastRequest;
+    QMutex m_sendMutex;
 
     unsigned char m_lastCmd;
 
